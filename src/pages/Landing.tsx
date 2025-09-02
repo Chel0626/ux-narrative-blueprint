@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button-variants"
 import { ArrowRight, Search, Calendar, VideoIcon, Shield, CheckCircle, Star, Heart, Home } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import heroImage from "@/assets/hero-dinddo.jpg"
+import doctorImage from "@/assets/dr-carlos-andrade.jpg"
 
 export default function Landing() {
   const navigate = useNavigate()
@@ -138,7 +139,7 @@ export default function Landing() {
           <div className="relative animate-slideUp">
             <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-card">
               <img 
-                src="/assets/dr-carlos-andrade.jpg" 
+                src={doctorImage} 
                 alt="Médico sorrindo com selo de Curadoria Dinddo Aprovado"
                 className="w-full h-full object-cover"
               />
