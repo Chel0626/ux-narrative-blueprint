@@ -1,16 +1,18 @@
+// Arquivo: src/pages/ProfessionalProfile.tsx
+
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { Button } from "@/components/ui/button-variants"
+import { Button } from "@/components/ui/button"
 import { TrustBadge } from "@/components/TrustBadge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Calendar } from "@/components/ui/calendar"
-import { Heart, ArrowLeft, Star, MapPin, GraduationCap, Award, Clock, Video, Home, Shield, Users } from "lucide-react"
+import { DatePicker } from "@/components/ui/date-picker" // Importa o DatePicker
+import { Heart, ArrowLeft, Star, MapPin, GraduationCap, Award, Clock, Video, Home, Shield, Users, Calendar } from "lucide-react";
 import drCarlosImage from "@/assets/dr-carlos-andrade.jpg"
 
 export default function ProfessionalProfile() {
   const navigate = useNavigate()
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date())
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>() // Estado inicial corrigido para undefined
   const [selectedTime, setSelectedTime] = useState("")
 
   const handleBooking = () => {
@@ -35,7 +37,7 @@ export default function ProfessionalProfile() {
           <div className="flex items-center justify-between">
             {/* Logo and Back */}
             <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" onClick={() => navigate(-1)}>
                 <ArrowLeft className="h-5 w-5" />
               </Button>
               <div className="flex items-center gap-2">
@@ -201,7 +203,6 @@ export default function ProfessionalProfile() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {/* Sample reviews */}
                 <div className="space-y-4">
                   <div className="border-l-4 border-trust pl-4">
                     <div className="flex items-center gap-2 mb-2">
@@ -255,23 +256,21 @@ export default function ProfessionalProfile() {
                   <div className="text-sm opacity-90">por consulta</div>
                 </div>
 
-                {/* Calendar */}
+                {/* DatePicker */}
                 <div className="space-y-3">
                   <label className="text-sm font-medium text-foreground">
                     Escolha uma data:
                   </label>
-                  <Calendar
-                    mode="single"
-                    selected={selectedDate}
-                    onSelect={setSelectedDate}
-                    className="rounded-md border"
-                    disabled={(date) => date < new Date() || date.getDay() === 0}
+                  <DatePicker 
+                    date={selectedDate} 
+                    onDateChange={setSelectedDate}
+                    disabled={(date) => date < new Date(new Date().setDate(new Date().getDate() - 1)) || date.getDay() === 0 || date.getDay() === 6}
                   />
                 </div>
 
                 {/* Time Slots */}
                 {selectedDate && (
-                  <div className="space-y-3">
+                  <div className="space-y-3 animate-fadeIn">
                     <label className="text-sm font-medium text-foreground">
                       Horários disponíveis:
                     </label>
